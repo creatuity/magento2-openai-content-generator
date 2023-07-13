@@ -20,6 +20,6 @@
     "require": {
         "php": "^8.1",
         "orhanerday/open-ai": "^4.8",
-        "creatuity/ai-content-genrator-core": "^0.1.0"
+        "creatuity/magento2-ai-content-generator-core": "^0.1.0"
     }
 }
