@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <creatuityaicontent>
+            <general>
+                <aiprovider>openai</aiprovider>
+            </general>
+            <openai_api>
+                <model_name>text-davinci-003</model_name>
+            </openai_api>
+        </creatuityaicontent>
+    </default>
+</config>
