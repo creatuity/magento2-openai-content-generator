@@ -17,4 +17,24 @@
             </argument>
         </arguments>
     </type>
+    <type name="Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\CompletionModelHandler">
+        <arguments>
+            <argument name="supportedModels" xsi:type="array">
+                <item name="text-davinci-003" xsi:type="string">text-davinci-003</item>
+            </argument>
+            <argument name="promptOptions" xsi:type="array">
+                <item name="temperature" xsi:type="const">Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\ModelHandlerInterface::DEFAULT_TEMPERATURE</item>
+                <item name="max_tokens" xsi:type="const">Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\ModelHandlerInterface::MAX_TOKEN_LENGTH</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Creatuity\AIContentOpenAI\Model\AIProvider\GetModelHandler">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="completion" xsi:type="object">Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\CompletionModelHandler</item>
+                <item name="chat" xsi:type="object">Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\ChatModelHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
 </config>

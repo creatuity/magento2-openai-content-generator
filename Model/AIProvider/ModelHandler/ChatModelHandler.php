@@ -18,7 +18,7 @@ class ChatModelHandler implements ModelHandlerInterface
     ) {
     }
 
-    public function call(string $model, array $options = [], ?object $stream = null): bool|string
+    public function call(string $model, array $options = [], ?object $stream = null): bool|array
     {
         if (!$this->isApplicable($model)) {
             throw new UnsupportedOpenAiModelException(__('Model %1 is unsupported by %2', $model, static::class));
