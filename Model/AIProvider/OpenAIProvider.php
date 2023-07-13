@@ -27,13 +27,12 @@ class OpenAIProvider implements AIProviderInterface
         $modelName = $this->openAiConfig->getModelName();
         $options = [];
         $options['prompt'] = $request->getInput();
-        $response = $this->getModelHandler->execute($modelName)->call($modelName, $options);
+        $text = $this->getModelHandler->execute($modelName)->call($modelName, $options)->getText();
+        $text = trim($text);
 
-        if (!$response || empty($response['choices'][0]['text'])) {
-            throw new LocalizedException(__('Failed to generate content using OpenAI. Please verify your configuration and try again.'));
+        if (!$text) {
+            throw new LocalizedException(__('Failed to generate content using OpenAI. It might be caused by some temporary issue. Please verify your configuration and try again.'));
         }
-
-        $text = trim($response['choices'][0]['text']);
 
         return $this->AIResponseInterfaceFactory->create(['data' => [AIResponseInterface::CONTENT_FIELD => $text]]);
     }

@@ -6,7 +6,8 @@ namespace Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler;
 
 use Creatuity\AIContentOpenAI\Exception\UnsupportedOpenAiModelException;
 use Creatuity\AIContentOpenAI\Model\CreatuityOpenAi;
-use Magento\Framework\Serialize\Serializer\Json;
+use Creatuity\AIContentOpenAI\Model\Http\Response\CompletionResponseFactory;
+use Creatuity\AIContentOpenAI\Model\Http\Response\OpenAiApiResponseInterface;
 
 class CompletionModelHandler implements ModelHandlerInterface
 {
@@ -15,21 +16,25 @@ class CompletionModelHandler implements ModelHandlerInterface
      */
     public function __construct(
         private readonly CreatuityOpenAi $openAi,
-        private readonly Json $json,
+        private readonly CompletionResponseFactory $completionResponseFactory,
         private readonly array $supportedModels = [],
         private readonly array $promptOptions = []
     ) {
     }
 
-    public function call(string $model, array $options = [], ?object $stream = null): bool|array
+    public function call(string $model, array $options = [], ?object $stream = null): OpenAiApiResponseInterface
     {
         if (!$this->isApplicable($model)) {
             throw new UnsupportedOpenAiModelException(__('Model %1 is unsupported by %2', $model, static::class));
         }
+
         $options = array_merge($options, $this->promptOptions);
         $options['model'] = $model;
+        $options['max_tokens'] -= ceil(mb_strlen($options['prompt']) / self::AVG_TOKEN_LENGTH);
 
-        return $this->json->unserialize($this->openAi->completion($options, $stream));
+        return $this->completionResponseFactory->create([
+            'response' => (string) $this->openAi->completion($options, $stream)
+        ]);
     }
 
     public function isApplicable(string $model): bool

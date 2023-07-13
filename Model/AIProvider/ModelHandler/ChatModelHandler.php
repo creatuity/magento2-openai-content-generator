@@ -6,6 +6,8 @@ namespace Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler;
 
 use Creatuity\AIContentOpenAI\Exception\UnsupportedOpenAiModelException;
 use Creatuity\AIContentOpenAI\Model\CreatuityOpenAi;
+use Creatuity\AIContentOpenAI\Model\Http\Response\ChatResponseFactory;
+use Creatuity\AIContentOpenAI\Model\Http\Response\OpenAiApiResponseInterface;
 
 class ChatModelHandler implements ModelHandlerInterface
 {
@@ -14,11 +16,12 @@ class ChatModelHandler implements ModelHandlerInterface
      */
     public function __construct(
         private readonly CreatuityOpenAi $openAi,
+        private readonly ChatResponseFactory $chatResponseFactory,
         private readonly array $supportedModels = []
     ) {
     }
 
-    public function call(string $model, array $options = [], ?object $stream = null): bool|array
+    public function call(string $model, array $options = [], ?object $stream = null): OpenAiApiResponseInterface
     {
         if (!$this->isApplicable($model)) {
             throw new UnsupportedOpenAiModelException(__('Model %1 is unsupported by %2', $model, static::class));
@@ -26,7 +29,9 @@ class ChatModelHandler implements ModelHandlerInterface
 
         $options['model'] = $model;
 
-        return $this->openAi->chat($options, $stream);
+        return $this->chatResponseFactory->create([
+            'response' => (string) $this->openAi->chat($options, $stream)
+        ]);
     }
 
     public function isApplicable(string $model): bool

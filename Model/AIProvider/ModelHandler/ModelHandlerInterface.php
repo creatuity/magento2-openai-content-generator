@@ -5,20 +5,23 @@ declare(strict_types=1);
 namespace Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler;
 
 use Creatuity\AIContentOpenAI\Exception\UnsupportedOpenAiModelException;
+use Creatuity\AIContentOpenAI\Model\Http\Response\OpenAiApiResponseInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 interface ModelHandlerInterface
 {
     public const MAX_TOKEN_LENGTH = 4000;
     public const DEFAULT_TEMPERATURE = 1;
+    public const AVG_TOKEN_LENGTH = 4;
 
     /**
      * @param string $model
      * @param array $options
      * @param object|null $stream
-     * @return bool|array
      * @throws UnsupportedOpenAiModelException
+     * @throws LocalizedException
      * @throws \Exception
      */
-    public function call(string $model, array $options = [], ?object $stream = null): bool|array;
+    public function call(string $model, array $options = [], ?object $stream = null): OpenAiApiResponseInterface;
     public function isApplicable(string $model): bool;
 }
