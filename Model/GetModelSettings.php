@@ -23,6 +23,6 @@ class GetModelSettings
 
     public function getMaxTokens(string $model): int
     {
-        return (int) $this->settings[$model]['max_length'] ?? ModelHandlerInterface::MAX_TOKEN_LENGTH;
+        return (int) ($this->settings[$model]['max_length'] ?? ModelHandlerInterface::MAX_TOKEN_LENGTH);
     }
 }
