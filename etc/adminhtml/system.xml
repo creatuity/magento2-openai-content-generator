@@ -9,8 +9,9 @@
                     <label>API Key</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
-                <field id="model_name" translate="label" sortOrder="20" type="text" showInStore="0" showInDefault="1" showInWebsite="0" canRestore="1">
+                <field id="model_name" translate="label" sortOrder="20" type="select" showInStore="0" showInDefault="1" showInWebsite="0" canRestore="1">
                     <label>Model Name</label>
+                    <source_model>Creatuity\AIContentOpenAI\OptionSource\GetModelsOptionSource</source_model>
                 </field>
             </group>
         </section>

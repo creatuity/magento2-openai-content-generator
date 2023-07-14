@@ -8,6 +8,7 @@ use Creatuity\AIContentOpenAI\Exception\UnsupportedOpenAiModelException;
 use Creatuity\AIContentOpenAI\Model\CreatuityOpenAi;
 use Creatuity\AIContentOpenAI\Model\Http\Response\ChatResponseFactory;
 use Creatuity\AIContentOpenAI\Model\Http\Response\OpenAiApiResponseInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 class ChatModelHandler implements ModelHandlerInterface
 {
@@ -17,7 +18,8 @@ class ChatModelHandler implements ModelHandlerInterface
     public function __construct(
         private readonly CreatuityOpenAi $openAi,
         private readonly ChatResponseFactory $chatResponseFactory,
-        private readonly array $supportedModels = []
+        private readonly array $supportedModels = [],
+        private readonly array $promptOptions = []
     ) {
     }
 
@@ -28,10 +30,30 @@ class ChatModelHandler implements ModelHandlerInterface
         }
 
         $options['model'] = $model;
+        $options = array_merge($options, $this->promptOptions);
+        $options['messages'] = [
+            [
+                'role' => 'user',
+                'content' => $options['prompt']
+            ]
+        ];
+        unset($options['prompt']);
 
-        return $this->chatResponseFactory->create([
+        array_walk_recursive($options, function (&$val) {
+            if (is_numeric($val)) {
+                $val = (float) $val;
+            }
+        });
+
+        $response = $this->chatResponseFactory->create([
             'response' => (string) $this->openAi->chat($options, $stream)
         ]);
+
+        if ($response->getError()) {
+            throw new LocalizedException(__($response->getError()));
+        }
+
+        return $response;
     }
 
     public function isApplicable(string $model): bool

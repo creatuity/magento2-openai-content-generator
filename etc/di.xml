@@ -17,16 +17,71 @@
             </argument>
         </arguments>
     </type>
+    <type name="Creatuity\AIContentOpenAI\Model\GetModelSettings">
+        <arguments>
+            <argument name="settings" xsi:type="array">
+                <item name="text-davinci-002" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">4097</item>
+                </item>
+                <item name="text-davinci-003" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">4097</item>
+                </item>
+                <item name="gpt-3.5-turbo" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">4097</item>
+                </item>
+                <item name="gpt-3.5-turbo-0301" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">4097</item>
+                </item>
+                <item name="gpt-3.5-turbo-0613" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">4097</item>
+                </item>
+                <item name="gpt-3.5-turbo-16k" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">16384</item>
+                </item>
+                <item name="gpt-3.5-turbo-16k-0613" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">16384</item>
+                </item>
+                <item name="gpt-4" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">8192</item>
+                </item>
+                <item name="gpt-4-0314" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">8192</item>
+                </item>
+                <item name="gpt-4-0613" xsi:type="array">
+                    <item name="max_tokens" xsi:type="number">8192</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\CompletionModelHandler">
         <arguments>
             <argument name="supportedModels" xsi:type="array">
+                <item name="text-davinci-002" xsi:type="string">text-davinci-002</item>
                 <item name="text-davinci-003" xsi:type="string">text-davinci-003</item>
             </argument>
             <argument name="promptOptions" xsi:type="array">
                 <item name="temperature" xsi:type="const">Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\ModelHandlerInterface::DEFAULT_TEMPERATURE</item>
-                <item name="max_tokens" xsi:type="const">Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\ModelHandlerInterface::MAX_TOKEN_LENGTH</item>
             </argument>
         </arguments>
+    </type>
+    <type name="Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\ChatModelHandler">
+         <arguments>
+             <argument name="supportedModels" xsi:type="array">
+                 <item name="gpt-3.5-turbo" xsi:type="string">gpt-3.5-turbo</item>
+                 <item name="gpt-3.5-turbo-0301" xsi:type="string">gpt-3.5-turbo-0301</item>
+                 <item name="gpt-3.5-turbo-0613" xsi:type="string">gpt-3.5-turbo</item>
+                 <item name="gpt-3.5-turbo-16k" xsi:type="string">gpt-3.5-turbo-16k</item>
+                 <item name="gpt-3.5-turbo-16k-0613" xsi:type="string">gpt-3.5-turbo-16k-0613</item>
+                 <item name="gpt-4" xsi:type="string">gpt-4</item>
+                 <item name="gpt-4-0314" xsi:type="string">gpt-4-0314</item>
+                 <item name="gpt-4-0613" xsi:type="string">gpt-4-0613</item>
+             </argument>
+             <argument name="promptOptions" xsi:type="array">
+                 <item name="temperature" xsi:type="const">Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\ModelHandlerInterface::DEFAULT_TEMPERATURE</item>
+                 <item name="frequency_penalty" xsi:type="number">0</item>
+                 <item name="presence_penalty" xsi:type="number">0</item>
+             </argument>
+         </arguments>
     </type>
     <type name="Creatuity\AIContentOpenAI\Model\AIProvider\GetModelHandler">
         <arguments>

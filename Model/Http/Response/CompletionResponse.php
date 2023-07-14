@@ -19,6 +19,11 @@ class CompletionResponse implements OpenAiApiResponseInterface
         return $this->toArray()['choices'][0]['text'] ?? '';
     }
 
+    public function getError(): ?string
+    {
+        return $this->toArray()['error']['message'] ?? null;
+    }
+
     private function toArray(): array
     {
         return $this->json->unserialize($this->response);

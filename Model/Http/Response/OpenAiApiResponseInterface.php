@@ -12,4 +12,6 @@ interface OpenAiApiResponseInterface
      * @throws LocalizedException
      */
     public function getText(): string;
+
+    public function getError(): ?string;
 }

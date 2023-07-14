@@ -30,7 +30,7 @@ class CompletionModelHandler implements ModelHandlerInterface
 
         $options = array_merge($options, $this->promptOptions);
         $options['model'] = $model;
-        $options['max_tokens'] -= ceil(mb_strlen($options['prompt']) / self::AVG_TOKEN_LENGTH);
+        $options['max_tokens'] -= (int) ceil(mb_strlen($options['prompt']) / self::AVG_TOKEN_LENGTH);
 
         return $this->completionResponseFactory->create([
             'response' => (string) $this->openAi->completion($options, $stream)
