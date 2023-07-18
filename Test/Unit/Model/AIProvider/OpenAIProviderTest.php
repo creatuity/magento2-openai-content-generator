@@ -7,6 +7,7 @@ namespace Creatuity\AIContentOpenAI\Test\Unit\Model\AIProvider;
 use Creatuity\AIContent\Api\Data\AIRequestInterface;
 use Creatuity\AIContent\Api\Data\AIResponseInterface;
 use Creatuity\AIContent\Api\Data\AIResponseInterfaceFactory;
+use Creatuity\AIContent\Api\Data\SpecificationInterface;
 use Creatuity\AIContentOpenAI\Model\AIProvider\GetModelHandler;
 use Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler\ModelHandlerInterface;
 use Creatuity\AIContentOpenAI\Model\AIProvider\OpenAIProvider;
@@ -36,14 +37,16 @@ class OpenAIProviderTest extends TestCase
     {
         $prompt = 'some text';
         $modelName = 'model name';
-        $responseText = 'some api response';
+        $responseText = ['some api response'];
         $this->openAiConfig->expects($this->once())->method('getModelName')->willReturn($modelName);
         $request = $this->createMock(AIRequestInterface::class);
         $request->expects($this->once())->method('getInput')->willReturn($prompt);
         $handler = $this->createMock(ModelHandlerInterface::class);
+        $spec = $this->createMock(SpecificationInterface::class);
+        $spec->expects($this->once())->method('getNumber')->willReturn(3);
         $apiResponse = $this->createMock(OpenAiApiResponseInterface::class);
         $apiResponse->expects($this->once())->method('getChoices')->willReturn($responseText);
-        $handler->expects($this->once())->method('call')->with($modelName, ['prompt' => $prompt])->willReturn($apiResponse);
+        $handler->expects($this->once())->method('call')->with($modelName, ['prompt' => $prompt, 'n' => 3])->willReturn($apiResponse);
         $this->getModelHandler->expects($this->once())->method('execute')->with($modelName)->willReturn($handler);
         $result = $this->createMock(AIResponseInterface::class);
         $this->AIResponseInterfaceFactory
@@ -51,26 +54,28 @@ class OpenAIProviderTest extends TestCase
             ->method('create')
             ->with(['data' => [AIResponseInterface::CHOICES_FIELD => $responseText]])
             ->willReturn($result);
-        $this->assertSame($result, $this->getObject()->call($request));
+        $this->assertSame($result, $this->getObject()->call($request, $spec));
     }
 
     public function testCallException(): void
     {
         $prompt = 'some text';
         $modelName = 'model name';
-        $responseText = '   ';
+        $responseText = [];
         $this->openAiConfig->expects($this->once())->method('getModelName')->willReturn($modelName);
+        $spec = $this->createMock(SpecificationInterface::class);
+        $spec->expects($this->once())->method('getNumber')->willReturn(3);
         $request = $this->createMock(AIRequestInterface::class);
         $request->expects($this->once())->method('getInput')->willReturn($prompt);
         $handler = $this->createMock(ModelHandlerInterface::class);
         $apiResponse = $this->createMock(OpenAiApiResponseInterface::class);
         $apiResponse->expects($this->once())->method('getChoices')->willReturn($responseText);
-        $handler->expects($this->once())->method('call')->with($modelName, ['prompt' => $prompt])->willReturn($apiResponse);
+        $handler->expects($this->once())->method('call')->with($modelName, ['prompt' => $prompt, 'n' => 3])->willReturn($apiResponse);
         $this->getModelHandler->expects($this->once())->method('execute')->with($modelName)->willReturn($handler);
         $this->expectException(LocalizedException::class);
         $this->expectExceptionMessage((string) __('Failed to generate content using OpenAI. It might be caused by some temporary issue. Please verify your configuration and try again.'));
         $this->AIResponseInterfaceFactory->expects($this->never())->method('create');
-        $this->getObject()->call($request);
+        $this->getObject()->call($request, $spec);
     }
 
     private function getObject(): OpenAIProvider
