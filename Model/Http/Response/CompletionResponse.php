@@ -14,7 +14,7 @@ class CompletionResponse implements OpenAiApiResponseInterface
     ) {
     }
 
-    public function getText(): string
+    public function getChoices(): string
     {
         return $this->toArray()['choices'][0]['text'] ?? '';
     }

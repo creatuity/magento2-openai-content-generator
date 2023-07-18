@@ -29,7 +29,7 @@ class ChatResponseTest extends TestCase
             ->with(self::RESPONSE_JSON)
             ->willReturn(['choices' => [['message' => ['content' => 'Test content']]]]);
         $chatResponse = new ChatResponse($this->jsonMock, self::RESPONSE_JSON);
-        $this->assertSame('Test content', $chatResponse->getText());
+        $this->assertSame('Test content', $chatResponse->getChoices());
     }
 
     public function testGetError(): void

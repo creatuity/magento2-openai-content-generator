@@ -42,14 +42,14 @@ class OpenAIProviderTest extends TestCase
         $request->expects($this->once())->method('getInput')->willReturn($prompt);
         $handler = $this->createMock(ModelHandlerInterface::class);
         $apiResponse = $this->createMock(OpenAiApiResponseInterface::class);
-        $apiResponse->expects($this->once())->method('getText')->willReturn($responseText);
+        $apiResponse->expects($this->once())->method('getChoices')->willReturn($responseText);
         $handler->expects($this->once())->method('call')->with($modelName, ['prompt' => $prompt])->willReturn($apiResponse);
         $this->getModelHandler->expects($this->once())->method('execute')->with($modelName)->willReturn($handler);
         $result = $this->createMock(AIResponseInterface::class);
         $this->AIResponseInterfaceFactory
             ->expects($this->once())
             ->method('create')
-            ->with(['data' => [AIResponseInterface::CONTENT_FIELD => $responseText]])
+            ->with(['data' => [AIResponseInterface::CHOICES_FIELD => $responseText]])
             ->willReturn($result);
         $this->assertSame($result, $this->getObject()->call($request));
     }
@@ -64,7 +64,7 @@ class OpenAIProviderTest extends TestCase
         $request->expects($this->once())->method('getInput')->willReturn($prompt);
         $handler = $this->createMock(ModelHandlerInterface::class);
         $apiResponse = $this->createMock(OpenAiApiResponseInterface::class);
-        $apiResponse->expects($this->once())->method('getText')->willReturn($responseText);
+        $apiResponse->expects($this->once())->method('getChoices')->willReturn($responseText);
         $handler->expects($this->once())->method('call')->with($modelName, ['prompt' => $prompt])->willReturn($apiResponse);
         $this->getModelHandler->expects($this->once())->method('execute')->with($modelName)->willReturn($handler);
         $this->expectException(LocalizedException::class);

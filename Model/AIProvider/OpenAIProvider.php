@@ -8,6 +8,7 @@ use Creatuity\AIContent\Api\AIProviderInterface;
 use Creatuity\AIContent\Api\Data\AIRequestInterface;
 use Creatuity\AIContent\Api\Data\AIResponseInterface;
 use Creatuity\AIContent\Api\Data\AIResponseInterfaceFactory;
+use Creatuity\AIContent\Api\Data\SpecificationInterface;
 use Creatuity\AIContentOpenAI\Model\Config\OpenAiConfig;
 use Magento\Framework\Exception\LocalizedException;
 
@@ -22,19 +23,19 @@ class OpenAIProvider implements AIProviderInterface
     ) {
     }
 
-    public function call(AIRequestInterface $request): AIResponseInterface
+    public function call(AIRequestInterface $request, SpecificationInterface $specification): AIResponseInterface
     {
         $modelName = $this->openAiConfig->getModelName();
         $options = [];
         $options['prompt'] = $request->getInput();
-        $text = $this->getModelHandler->execute($modelName)->call($modelName, $options)->getText();
-        $text = trim($text);
+        $options['n'] = $specification->getNumber();
+        $choices = $this->getModelHandler->execute($modelName)->call($modelName, $options)->getChoices();
 
-        if (!$text) {
+        if (empty($choices)) {
             throw new LocalizedException(__('Failed to generate content using OpenAI. It might be caused by some temporary issue. Please verify your configuration and try again.'));
         }
 
-        return $this->AIResponseInterfaceFactory->create(['data' => [AIResponseInterface::CONTENT_FIELD => $text]]);
+        return $this->AIResponseInterfaceFactory->create(['data' => [AIResponseInterface::CHOICES_FIELD => $choices]]);
     }
 
     public function isApplicable(string $name): bool
