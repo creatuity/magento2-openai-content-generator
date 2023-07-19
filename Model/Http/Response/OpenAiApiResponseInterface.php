@@ -10,8 +10,9 @@ interface OpenAiApiResponseInterface
 {
     /**
      * @throws LocalizedException
+     * @return string[]
      */
-    public function getText(): string;
+    public function getChoices(): array;
 
     public function getError(): ?string;
 }
