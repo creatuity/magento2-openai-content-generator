@@ -1,7 +1,7 @@
 {
     "name": "creatuity/magento2-openai-content-generator",
     "description": "Creatuity OpenAI Content Generator",
-    "version": "0.1.0",
+    "version": "0.0.2",
     "type": "magento2-module",
     "license": [
         "Proprietary"
@@ -20,6 +20,6 @@
     "require": {
         "php": "^8.1",
         "orhanerday/open-ai": "^4.8",
-        "creatuity/magento2-ai-content-generator-core": "^0.1.0"
+        "creatuity/magento2-ai-content-generator-core": "^0.0.2"
     }
 }
