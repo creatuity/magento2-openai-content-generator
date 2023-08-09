@@ -26,10 +26,8 @@ class OpenAIProvider implements AIProviderInterface
     public function call(AIRequestInterface $request, SpecificationInterface $specification): AIResponseInterface
     {
         $modelName = $this->openAiConfig->getModelName();
-        $options = [];
-        $options['prompt'] = $request->getInput();
-        $options['n'] = $specification->getNumber();
-        $choices = $this->getModelHandler->execute($modelName)->call($modelName, $options)->getChoices();
+        $request->setParam('n', $specification->getNumber());
+        $choices = $this->getModelHandler->execute($modelName)->call($modelName, $request)->getChoices();
 
         if (empty($choices)) {
             throw new LocalizedException(__('Failed to generate content using OpenAI. It might be caused by some temporary issue. Please verify your configuration and try again.'));

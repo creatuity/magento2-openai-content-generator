@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler;
 
+use Creatuity\AIContent\Api\Data\AIRequestInterface;
 use Creatuity\AIContentOpenAI\Exception\UnsupportedOpenAiModelException;
 use Creatuity\AIContentOpenAI\Model\Http\Response\OpenAiApiResponseInterface;
 use Magento\Framework\Exception\LocalizedException;
@@ -16,12 +17,12 @@ interface ModelHandlerInterface
 
     /**
      * @param string $model
-     * @param array $options
+     * @param AIRequestInterface $request
      * @param object|null $stream
      * @throws UnsupportedOpenAiModelException
      * @throws LocalizedException
      * @throws \Exception
      */
-    public function call(string $model, array $options = [], ?object $stream = null): OpenAiApiResponseInterface;
+    public function call(string $model, AIRequestInterface $request, ?object $stream = null): OpenAiApiResponseInterface;
     public function isApplicable(string $model): bool;
 }

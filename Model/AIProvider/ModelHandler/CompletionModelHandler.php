@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler;
 
+use Creatuity\AIContent\Api\Data\AIRequestInterface;
 use Creatuity\AIContentOpenAI\Exception\UnsupportedOpenAiModelException;
 use Creatuity\AIContentOpenAI\Model\CreatuityOpenAi;
 use Creatuity\AIContentOpenAI\Model\Http\Response\CompletionResponseFactory;
@@ -23,16 +24,24 @@ class CompletionModelHandler implements ModelHandlerInterface
     ) {
     }
 
-    public function call(string $model, array $options = [], ?object $stream = null): OpenAiApiResponseInterface
+    public function call(string $model, AIRequestInterface $request, ?object $stream = null): OpenAiApiResponseInterface
     {
         if (!$this->isApplicable($model)) {
             throw new UnsupportedOpenAiModelException(__('Model %1 is unsupported by %2', $model, static::class));
         }
 
-        $options = array_merge($options, $this->promptOptions);
+        $options = $this->promptOptions;
+        $options = array_merge($options, $request->getParams());
         $options['model'] = $model;
         $options['max_tokens'] = $options['max_tokens'] ?? self::MAX_TOKEN_LENGTH;
-        $options['max_tokens'] -= (int) ceil(mb_strlen($options['prompt']) / self::AVG_TOKEN_LENGTH);
+
+        $promptMsg = '';
+        foreach ($request->getPrompt() as $prompt) {
+            $promptMsg .= $prompt . "\n\n";
+        }
+
+        $options['max_tokens'] -= (int) (ceil(mb_strlen($promptMsg) / self::AVG_TOKEN_LENGTH));
+        $options['prompt'] = $promptMsg;
 
         $response = $this->completionResponseFactory->create([
             'response' => (string) $this->openAi->completion($options, $stream)
