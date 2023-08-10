@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Creatuity\AIContentOpenAI\Model\AIProvider\ModelHandler;
 
+use Creatuity\AIContent\Api\Data\AIRequestInterface;
 use Creatuity\AIContentOpenAI\Exception\UnsupportedOpenAiModelException;
 use Creatuity\AIContentOpenAI\Model\CreatuityOpenAi;
 use Creatuity\AIContentOpenAI\Model\Http\Response\ChatResponseFactory;
@@ -23,21 +24,20 @@ class ChatModelHandler implements ModelHandlerInterface
     ) {
     }
 
-    public function call(string $model, array $options = [], ?object $stream = null): OpenAiApiResponseInterface
+    public function call(string $model, AIRequestInterface $request, ?object $stream = null): OpenAiApiResponseInterface
     {
         if (!$this->isApplicable($model)) {
             throw new UnsupportedOpenAiModelException(__('Model %1 is unsupported by %2', $model, static::class));
         }
 
+        $options = $this->promptOptions;
         $options['model'] = $model;
-        $options = array_merge($options, $this->promptOptions);
-        $options['messages'] = [
-            [
-                'role' => 'user',
-                'content' => $options['prompt']
-            ]
-        ];
-        unset($options['prompt']);
+        $options = array_merge($options, $request->getParams());
+        $options['messages'] = [];
+        foreach ($request->getPrompt() as $prompt) {
+            $options['messages'][] = $prompt->getInput();
+        }
+        $options['messages'] = array_merge([], ...$options['messages']);
 
         array_walk_recursive($options, function (&$val) {
             if (is_numeric($val)) {

@@ -19,7 +19,9 @@ class CompletionResponse implements OpenAiApiResponseInterface
         $choices = $this->toArray()['choices'] ?? [];
 
         return array_filter(array_map(function ($data) {
-            return $data['text'] ?? '';
+            preg_match('/<response>(.*)<\/response>/', $data['text'] ?? '', $matches);
+
+            return html_entity_decode($matches[1] ?? $data['text']);
         }, $choices));
     }
 

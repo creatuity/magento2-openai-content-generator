@@ -19,7 +19,9 @@ class ChatResponse implements OpenAiApiResponseInterface
         $choices = $this->toArray()['choices'] ?? [];
 
         return array_filter(array_map(function ($data) {
-            return $data['message']['content'] ?? '';
+            preg_match('/<response>(.*)<\/response>/sU', $data['message']['content'] ?? '', $matches);
+
+            return html_entity_decode($matches[1] ?? $data['message']['content'] ?? '');
         }, $choices));
     }
 
