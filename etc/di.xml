@@ -74,7 +74,7 @@
              <argument name="supportedModels" xsi:type="array">
                  <item name="gpt-3.5-turbo" xsi:type="string">gpt-3.5-turbo</item>
                  <item name="gpt-3.5-turbo-0301" xsi:type="string">gpt-3.5-turbo-0301</item>
-                 <item name="gpt-3.5-turbo-0613" xsi:type="string">gpt-3.5-turbo</item>
+                 <item name="gpt-3.5-turbo-0613" xsi:type="string">gpt-3.5-turbo-0613</item>
                  <item name="gpt-3.5-turbo-16k" xsi:type="string">gpt-3.5-turbo-16k</item>
                  <item name="gpt-3.5-turbo-16k-0613" xsi:type="string">gpt-3.5-turbo-16k-0613</item>
                  <item name="gpt-4" xsi:type="string">gpt-4</item>
