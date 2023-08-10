@@ -136,7 +136,7 @@
                 <item name="0" xsi:type="array">
                     <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate the product website's meta-description. It is important the meta-description must not be longer than 150 characters. Wrap the generated content with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
                     <item name="user" xsi:type="string"/>
-                    <item name="assistant" xsi:type="string">&lt;response&gt;Generated meta-description&lt;/response&gt;</item>
+                    <item name="assistant" xsi:type="string">&lt;response&gt;Generated meta-description with no more than 150 characters&lt;/response&gt;</item>
                 </item>
             </argument>
             <argument name="attributes" xsi:type="array">
@@ -153,7 +153,7 @@
                 <item name="0" xsi:type="array">
                     <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate from 10 to 15 comma-separated keywords. Put the most relevant keywords at the beginning of the list. Do not repeat keywords. Wrap the generated content with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
                     <item name="user" xsi:type="string"/>
-                    <item name="assistant" xsi:type="string">&lt;response&gt;keyword1, keyword2, keyword3&lt;/response&gt;</item>
+                    <item name="assistant" xsi:type="string">&lt;response&gt;keyword1, keyword2, keyword3, keyword4, keyword5, keyword6, keyword7, keyword8, keyword9, keyword10, keyword11, keyword12, keyword13, keyword14, keyword15&lt;/response&gt;</item>
                 </item>
             </argument>
             <argument name="attributes" xsi:type="array">
@@ -170,7 +170,7 @@
                 <item name="0" xsi:type="array">
                     <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate a website meta-title for the product. It is important the meta-title must not be longer than 60 characters and should be at least 50 characters. Do not wrap it with quotes. Wrap it with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
                     <item name="user" xsi:type="string"/>
-                    <item name="assistant" xsi:type="string">&lt;response&gt;Generated meta-title&lt;/response&gt;</item>
+                    <item name="assistant" xsi:type="string">&lt;response&gt;Generated meta-title with no more than 50 - 60 characters&lt;/response&gt;</item>
                 </item>
             </argument>
             <argument name="attributes" xsi:type="array">
