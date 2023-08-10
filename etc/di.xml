@@ -151,7 +151,7 @@
             <argument name="type" xsi:type="string">meta-keywords</argument>
             <argument name="prompt" xsi:type="array">
                 <item name="0" xsi:type="array">
-                    <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate from 10 to 15 comma-separated the product website's meta-keywords. Put the most relevant keywords at the beginning of the list. Do not repeat keywords. Wrap the generated content with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
+                    <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate from 10 to 15 comma-separated keywords. Put the most relevant keywords at the beginning of the list. Do not repeat keywords. Wrap the generated content with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
                     <item name="user" xsi:type="string"/>
                     <item name="assistant" xsi:type="string">&lt;response&gt;keyword1, keyword2, keyword3&lt;/response&gt;</item>
                 </item>
