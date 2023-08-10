@@ -129,7 +129,7 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="MetaDescriptionGenerator" type="Creatuity\AIContentOpenAI\Model\AIContentGenerator\DefaultTypedContentGenerator">
+    <virtualType name="MetaDescriptionGenerator" type="Creatuity\AIContentOpenAI\Model\AIContentGenerator\MetaTagContentGenerator">
         <arguments>
             <argument name="type" xsi:type="string">meta-description</argument>
             <argument name="prompt" xsi:type="array">
@@ -146,7 +146,7 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="MetaKeywordsGenerator" type="Creatuity\AIContentOpenAI\Model\AIContentGenerator\DefaultTypedContentGenerator">
+    <virtualType name="MetaKeywordsGenerator" type="Creatuity\AIContentOpenAI\Model\AIContentGenerator\MetaTagContentGenerator">
         <arguments>
             <argument name="type" xsi:type="string">meta-keywords</argument>
             <argument name="prompt" xsi:type="array">
@@ -163,7 +163,7 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="MetaTitleGenerator" type="Creatuity\AIContentOpenAI\Model\AIContentGenerator\DefaultTypedContentGenerator">
+    <virtualType name="MetaTitleGenerator" type="Creatuity\AIContentOpenAI\Model\AIContentGenerator\MetaTagContentGenerator">
         <arguments>
             <argument name="type" xsi:type="string">meta-title</argument>
             <argument name="prompt" xsi:type="array">
