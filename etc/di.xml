@@ -108,9 +108,9 @@
             <argument name="type" xsi:type="string">short_description</argument>
             <argument name="prompt" xsi:type="array">
                 <item name="0" xsi:type="array">
-                    <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate product's short description. It is important the description must not be longer than %max_len characters. You can use HTML tags to format the look. Wrap the generated content with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
+                    <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate product's short description HTML content. It is important the description must not be longer than %max_len characters. Wrap the generated content with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
                     <item name="user" xsi:type="string"/>
-                    <item name="assistant" xsi:type="string">&lt;response&gt;Generated product's decription&lt;/response&gt;</item>
+                    <item name="assistant" xsi:type="string">&lt;response&gt;Generated product's decription HTML content&lt;/response&gt;</item>
                 </item>
             </argument>
         </arguments>
@@ -121,9 +121,9 @@
             <argument name="type" xsi:type="string">description</argument>
             <argument name="prompt" xsi:type="array">
                 <item name="0" xsi:type="array">
-                    <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate product's description. It is important the description must not be longer than %max_len characters. You can use HTML tags to format the look. Wrap the generated content with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
+                    <item name="system" xsi:type="string">You will be given product attributes delimited with XML tags. Based on these attributes, generate product's description HTML content. It is important the description must not be longer than %max_len characters. Wrap the generated content with the following XML tag &lt;response&gt;&lt;/response&gt;</item>
                     <item name="user" xsi:type="string"/>
-                    <item name="assistant" xsi:type="string">&lt;response&gt;Generated product's decription&lt;/response&gt;</item>
+                    <item name="assistant" xsi:type="string">&lt;response&gt;Generated product's decription HTML content&lt;/response&gt;</item>
                 </item>
             </argument>
         </arguments>
