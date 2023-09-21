@@ -23,14 +23,14 @@
         "creatuity/magento2-ai-content-generator-core": "^0.0.2",
         "creatuity/magento2-ai-content-generator-mass-actions": "^0.0.2"
     },
-    "repositories": {
-        "magento2-ai-content-generator-core": {
+    "repositories": [
+        {
             "type": "vcs",
             "url": "git@github.com:creatuity/magento2-ai-content-generator-core.git"
         },
-        "magento2-ai-content-generator-mass-actions": {
+        {
             "type": "vcs",
             "url": "git@github.com:creatuity/magento2-ai-content-generator-mass-actions.git"
         }
-    }
+    ]
 }
