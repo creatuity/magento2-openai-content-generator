@@ -16,6 +16,7 @@ The Creatuity AI Content Generator module for Magento allows for the automated g
 
 This module consists of:
 - [Core Module](https://github.com/creatuity/magento2-ai-content-generator-core)
+- [Mass Actions Module](https://github.com/creatuity/magento2-ai-content-generator-mass-actions)
 - [OpenAI's Integration Module](https://github.com/creatuity/magento2-openai-content-generator)
 
 The core is designed with potential future integrations in mind, allowing for easy integration with other AI services.
@@ -74,6 +75,7 @@ For bulk content generation:
 
 ## Links
 - [Core Module Repository](https://github.com/creatuity/magento2-ai-content-generator-core)
+- [Mass Actions Module](https://github.com/creatuity/magento2-ai-content-generator-mass-actions)
 - [OpenAI Integration Module Repository](https://github.com/creatuity/magento2-openai-content-generator)
 
 ---
