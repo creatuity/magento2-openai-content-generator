@@ -48,6 +48,8 @@ If you have problem with instalation, add the following repositoreis to your com
 ### Configuration
 1. Navigate to `Stores → Configuration → Creatuity → AI Content`.
 2. Configure the fields as per your requirement:
+    ![image](https://github.com/creatuity/magento2-openai-content-generator/assets/1653168/5720949f-169b-4f14-af8f-878608835752)
+
 
     | Configuration Field    | Description | Default Value |
     |------------------------|-------------|---------------|
@@ -58,7 +60,21 @@ If you have problem with instalation, add the following repositoreis to your com
     | OpenAI API Key         | Your OpenAI API Token | - |
     | Model Name             | OpenAI model for requests. Model determines cost | gpt-3.5-turbo |
 
-**NOTE:** Ensure the product is created before generating any content using the module.
+
+Once the module is configured and enabled, you can go to product configuration.
+
+**NOTE:** You can’t generate any data using the module until product is created
+![image](https://github.com/creatuity/magento2-openai-content-generator/assets/1653168/9a7d3474-eb98-45a8-a344-3eb5329db1ea)
+
+When you create and configure product **(it is strongly recommended to fully configure product attributes first before generating description and meta-tags)** you can go to a proper section where you are able now to click **Generate With AI** button 
+
+The button opens a modal window where you can optionally configure some prompt settings which will be sent to AI model
+
+Example:
+
+![image](https://github.com/creatuity/magento2-openai-content-generator/assets/1653168/ff906f51-3f9c-4f0b-8205-1fae72097447)
+
+Product Attributes values are by default the same as the once selected in configuration. You can change here these selected by default attributes by selecting other attributes that you want to use to generate short description and description for this particular product
 
 ### Short Description
 - In the product configuration, navigate to the Content section.
